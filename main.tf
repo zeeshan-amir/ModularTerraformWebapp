@@ -54,7 +54,7 @@ module "autoscaling" {
 module "bastion" {
   source             = "./modules/bastion"
   vpc_id             = module.vpc.vpc_id
-  public_subnet_ids  = module.vpc.public_subnet_ids
+  public_subnet_ids  = [module.vpc.public_subnet_ids[0]]
   security_group_id  = module.security_groups.bastion_sg_id
   key_name = var.key_name
 }

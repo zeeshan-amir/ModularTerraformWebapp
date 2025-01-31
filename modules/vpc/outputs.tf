@@ -15,5 +15,8 @@ output "public_subnet_azs" {
 }
 
 output "public_subnets_by_az" {
-  value = zipmap(aws_subnet.public[*].availability_zone, aws_subnet.public[*].id)
+    value = {
+    for index, subnet in aws_subnet.public :
+    aws_subnet.public[index].availability_zone => subnet.id
+  }
 }
