@@ -5,7 +5,16 @@ terraform {
       version = "~> 4.0"
     }
   }
+
   required_version = ">= 0.12"
+
+  backend s3 {
+    bucket         = "zeeshan-terraform-state-bucket"   
+    key            = "terraform.tfstate"         
+    region         = "ap-northeast-1"            
+    encrypt        = true                     
+    dynamodb_table = "terraform-lock"  
+  }
 }
 
 provider "aws" {
